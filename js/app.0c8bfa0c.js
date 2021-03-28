@@ -63,7 +63,7 @@
         "use strict";
         s("85ec")
     }, "32da": function (e, t, s) {
-        e.exports = s.p + "./media/viking.d672094c.mp3"
+        e.exports = s.p + "./vue-music-app/media/viking.d672094c.mp3"
     }, 4678: function (e, t, s) {
         var n = {
             "./af": "2bfb",
@@ -478,9 +478,9 @@
         }).$mount("#app")
     }, "85ec": function (e, t, s) {
     }, "861c": function (e, t, s) {
-        e.exports = s.p + "./../media/Duivelspack -Voluspa-Die Weissagung aus der Lieder-Edda.0be2811c.mp3"
+        e.exports = s.p + "./vue-music-app/media/Duivelspack -Voluspa-Die Weissagung aus der Lieder-Edda.0be2811c.mp3"
     }, dae8: function (e, t, s) {
-        e.exports = s.p + "./media/Garmarna-Herr Mannelig.78789f59.mp3"
+        e.exports = s.p + "./vue-music-app/media/Garmarna-Herr Mannelig.78789f59.mp3"
     }
 });
 //# sourceMappingURL=app.0c8bfa0c.js.map
