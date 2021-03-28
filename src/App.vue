@@ -77,7 +77,7 @@ export default {
 
   methods: {
     updateTime(e) {
-      this.currentTime = e.path[0].currentTime
+      this.currentTime = e.target.currentTime
       this.currentTimeConverted = `${parseTime(this.currentTime)}`
 
     },
@@ -96,11 +96,11 @@ export default {
       if (typeof song.durationConverted !== "string") {
 
         this.player.onloadeddata = (e) => {
-          let duration = moment.duration(e.path[0].duration, "seconds")
+          let duration = moment.duration(e.target.duration, "seconds")
           let min = duration.minutes()
           let sec = duration.seconds() < 10 ? '0' + duration.seconds() : duration.seconds()
           this.current.durationConverted = min + ":" + sec
-          this.current.duration = Math.floor(e.path[0].duration)
+          this.current.duration = Math.floor(e.target.duration)
         }
       }
 
@@ -154,11 +154,11 @@ export default {
 
     // дубляж который меня бесит, сделать так что бы при входе первая композиция не была выбрана
     this.player.onloadeddata = (e) => {
-      let duration = moment.duration(e.path[0].duration, "seconds")
+      let duration = moment.duration(e.target.duration, "seconds")
       let min = duration.minutes()
       let sec = duration.seconds() < 10 ? '0' + duration.seconds() : duration.seconds()
       this.current.durationConverted = min + ":" + sec
-      this.current.duration = Math.floor(e.path[0].duration)
+      this.current.duration = Math.floor(e.target.duration)
     }
     this.player.ontimeupdate = (e) => {this.updateTime(e)}
     this.player.addEventListener('ended', function () {this.next()}.bind(this))
