@@ -63,7 +63,7 @@
         "use strict";
         s("85ec")
     }, "32da": function (e, t, s) {
-        e.exports = s.p + "media/viking.d672094c.mp3"
+        e.exports = s.p + "./media/viking.d672094c.mp3"
     }, 4678: function (e, t, s) {
         var n = {
             "./af": "2bfb",
