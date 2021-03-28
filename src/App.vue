@@ -38,8 +38,6 @@
 import moment from "moment";
 import {parseTime} from "@/utils/time.plugin";
 
-//import {parseTime} from './utils/time.plugin'
-
 export default {
   name: 'App',
   data() {
