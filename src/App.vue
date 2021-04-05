@@ -4,8 +4,8 @@
       <h1>My music</h1>
     </header>
     <main>
-      {{currentTime}}
-      <input type="range" min="0" :max="current.duration" v-model="currentTime" ref="range">
+
+      <input type="range" min="0" :max="current.duration" v-model="currentTime" ref="range" @change="changeHandler" @input="inputHandler">
       <section class="player">
        {{ currentTimeConverted }} / {{ current.durationConverted }}
         <h2 class="song-title">{{ current.title }} -
@@ -76,10 +76,18 @@ export default {
   },
 
   methods: {
+    inputHandler(){
+      this.player.currentTime = this.currentTime
+      this.currentTimeConverted = `${parseTime(this.currentTime)}`
+    },
+    changeHandler(){
+      console.log('change')
+      this.player.currentTime = this.currentTime
+      this.currentTimeConverted = `${parseTime(this.currentTime)}`
+    },
     updateTime(e) {
       this.currentTime = e.target.currentTime
       this.currentTimeConverted = `${parseTime(this.currentTime)}`
-
     },
     play(song) {
       this.index = this.songs.indexOf(song)
@@ -90,11 +98,8 @@ export default {
         this.player.src = this.current.src
       }
 
-
       // Получение длительности песни
-
       if (typeof song.durationConverted !== "string") {
-
         this.player.onloadeddata = (e) => {
           let duration = moment.duration(e.target.duration, "seconds")
           let min = duration.minutes()
@@ -103,7 +108,6 @@ export default {
           this.current.duration = Math.floor(e.target.duration)
         }
       }
-
 
       this.player.play();
 
@@ -126,7 +130,6 @@ export default {
 
     },
     next() {
-      console.log('next')
       if (this.index === this.songs.length-1) {
         this.index = 0
       }else{
