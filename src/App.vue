@@ -4,7 +4,6 @@
       <h1>My music</h1>
     </header>
     <main>
-
       <input type="range" min="0" :max="current.duration" v-model="currentTime" ref="range" @change="changeHandler" @input="inputHandler">
       <section class="player">
        {{ currentTimeConverted }} / {{ current.durationConverted }}
