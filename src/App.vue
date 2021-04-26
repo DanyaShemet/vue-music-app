@@ -15,19 +15,22 @@
         <div class="bottom__block_controls controls">
           <ButtonRandom @random="random" :isRandom="isRandom"/>
           <ButtonPrevious @prev="prev"/>
-          <ButtonPlayAndResume @resume="resume" :isPlaying="isPlaying"/>
+          <ButtonPlayAndResume @resume="resume" :isPlaying="isPlaying" :class="{ml:!isPlaying}"/>
           <ButtonNext @next="next"/>
           <ButtonRepeat :isRepeat="isRepeat" @repeatStatus="repeatStatus"/>
         </div>
         <div class="link__playlist">
-          <button>Далее</button>
+          <button @click="isChoosenable = !isChoosenable">Далее</button>
         </div>
-        <section class="playlist">
+        <section class="playlist" :class="{active: isChoosenable}">
           <button v-for="(song) in songs" :key="song.src"
                   :class="(song.src === current.src) ? 'song playing' : 'song'"
                   @click="(song.src === current.src) ? '' :  play(song)">
             {{ song.title }} - {{ song.artist }}
           </button>
+          <div class="link__playlist">
+            <button @click="isChoosenable = !isChoosenable">Далее</button>
+          </div>
         </section>
       </section>
     </main>
@@ -54,6 +57,7 @@ export default {
       current: {},
       isRepeat: false,
       isRandom: false,
+      isChoosenable: false,
       index: 0,
       currentTimeConverted: '0:00',
       currentTime: 0,
@@ -114,11 +118,16 @@ export default {
       this.currentTimeConverted = `${parseTime(this.currentTime)}`
     },
     play(song) {
+      // Всем песням убираем активность, одной даем
       this.songs.forEach(el => el.active = false)
       this.songs[this.index].active = true
-      // this.index = this.songs.indexOf(song)
+
+      // При выборе песни вручную меняем индекс
+      this.index = this.songs.indexOf(song)
+
       this.player.currentTime = this.currentTime
       this.isPlaying = true;
+
       if (typeof song.src != "undefined") {
         this.current = song;
         this.player.src = this.current.src
@@ -137,7 +146,7 @@ export default {
 
       this.player.play();
 
-      // Изменение времени
+      // Изменение времени на счетчике пока песня играет
       this.player.ontimeupdate = (e) => {
         this.updateTime(e)
       }
@@ -275,7 +284,6 @@ header {
 
 main {
   width: 100%;
-  max-width: 768px;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -303,12 +311,27 @@ button {
   position: absolute;
   z-index: 100;
   height: 100%;
-  background: black;
+  background: rgba(255,255,255,0.9);
   top: 0;
   left: 0;
   width: 100%;
+  transform: translateY(100%);
+  transition: transform .3s;
 }
+.playlist.active{
+  transform: translateY(0%);
+}
+.playlist .link__playlist{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -23px;
 
+}
+.playlist .link__playlist button{
+  color: #000000 !important;
+  border-color: #000;
+}
 .playlist h3 {
   color: #212121;
   font-size: 28px;
@@ -324,15 +347,17 @@ button {
   font-size: 20px;
   font-weight: 700;
   cursor: pointer;
+  font-family: Sarala, sans-serif;
+  border-bottom: 1px solid #ccc;
 }
 
 .playlist .song:hover {
-  color: #FF5858;
+  background-color: rgba(0,0,0,0.2);
 }
 
 .playlist .song.playing {
-  color: #FFF;
-  background-image: linear-gradient(to right, #CC2E5D, #FF5858);
+  color: #000;
+  background-color: rgba(0,0,0,0.2);
 }
 
 .artist__img {
@@ -364,6 +389,7 @@ button {
   border-radius: 10px;
   background-color: #fff;
   position: relative;
+  overflow: hidden;
 }
 
 .middle_block_title {
@@ -484,6 +510,11 @@ svg {
   display: flex;
   align-items: center;
   justify-content: center;
+  outline: none;
+}
+.bottom__block_controls button:focus{
+  outline: none;
+  background-color: transparent;
 }
 
 .bottom__block_controls button:hover {
@@ -517,7 +548,8 @@ svg {
   background-color: #d7d7d7;
 }
 
-.bottom__block_controls .play svg {
+
+.ml svg{
   margin-left: 5px;
 }
 
@@ -532,6 +564,39 @@ svg {
   margin-bottom: 5px;
   font-family: 'Sarala', sans-serif;
   font-weight: 400;
+}
+
+@media screen and (max-width: 600px){
+  .player {
+    width: 95%;
+  }
+  .top_block_img{
+    height: 250px;
+  }
+  .artist__img{
+    width: 200px;
+    margin-top: -100px;
+    margin-left: -100px;
+  }
+  .middle_block_title h2{
+    font-size: 26px;
+  }
+  .bottom__block_controls .main-btn{
+    width: 70px;
+    height: 70px;
+  }
+  .bottom__block_controls .main-btn svg{
+    width: 25px;
+  }
+  .bottom__block_controls button{
+    width: 50px;
+    height: 50px;
+  }
+  .bottom__block_controls button{
+    padding: 5px;
+  }
+
+
 }
 
 
