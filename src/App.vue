@@ -1,7 +1,6 @@
 <template>
-  <div id="app">
+  <div id="app" :style="{background: songs[index].background}" >
     <main>
-
       <section class="player">
         <ImageSong :src="current.image"/>
         <TitleSong :current="current"/>
@@ -23,14 +22,13 @@
         <div class="link__playlist">
           <button>Далее</button>
         </div>
-      </section>
-
-      <section class="playlist">
-        <button v-for="(song) in songs" :key="song.src"
-                :class="(song.src === current.src) ? 'song playing' : 'song'"
-                @click="(song.src === current.src) ? '' :  play(song)">
-          {{ song.title }} - {{ song.artist }}
-        </button>
+        <section class="playlist">
+          <button v-for="(song) in songs" :key="song.src"
+                  :class="(song.src === current.src) ? 'song playing' : 'song'"
+                  @click="(song.src === current.src) ? '' :  play(song)">
+            {{ song.title }} - {{ song.artist }}
+          </button>
+        </section>
       </section>
     </main>
   </div>
@@ -38,6 +36,7 @@
 
 <script>
 import moment from "moment";
+import FastAverageColor from 'fast-average-color/dist/index.min'
 import {parseTime} from "@/utils/time.plugin";
 import ImageSong from "@/components/ImageSong";
 import TitleSong from "@/components/TitleSong";
@@ -69,7 +68,8 @@ export default {
           image: require('./assets/image/garmarna.jpg'),
           durationConverted: null,
           duration: null,
-          active: false
+          active: false,
+          background: null
         },
         {
           title: 'Voluspa',
@@ -78,7 +78,8 @@ export default {
           image: require('./assets/image/duivelaspack.jpg'),
           durationConverted: null,
           duration: null,
-          active: false
+          active: false,
+          background: null
         },
         {
           title: 'Viking fight music',
@@ -87,21 +88,24 @@ export default {
           image: require('./assets/image/vikingfight.jpg'),
           durationConverted: null,
           duration: null,
-          active: false
+          active: false,
+          background: null
         },
       ],
-      player: new Audio()
+      player: new Audio(),
+      styleObject: {
+        color: 'red',
+        fontSize: '13px'
+      }
     }
   },
 
   methods: {
     inputHandler() {
-      console.log('input')
       this.player.currentTime = this.currentTime
       this.currentTimeConverted = `${parseTime(this.currentTime)}`
     },
     changeHandler() {
-      console.log('change')
       this.player.currentTime = this.currentTime
       this.currentTimeConverted = `${parseTime(this.currentTime)}`
     },
@@ -229,12 +233,23 @@ export default {
     }.bind(this))
 
 
+  },
+  mounted() {
+    const fac = new FastAverageColor()
+    this.songs.forEach(song => {
+      fac.getColorAsync(`${song.image}`).then( color => song.background = color.hex) .catch(e => {console.log(e);});
+    })
+
   }
 }
 
 </script>
 
 <style>
+.hidden {
+  display: none;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -285,7 +300,13 @@ button {
 
 
 .playlist {
-  padding: 0px 30px;
+  position: absolute;
+  z-index: 100;
+  height: 100%;
+  background: black;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .playlist h3 {
@@ -341,6 +362,8 @@ button {
   width: 490px;
   border: 1px solid #000;
   border-radius: 10px;
+  background-color: #fff;
+  position: relative;
 }
 
 .middle_block_title {
@@ -507,6 +530,8 @@ svg {
   border-bottom: 1px solid #C0C0C0;
   font-size: 16px;
   margin-bottom: 5px;
+  font-family: 'Sarala', sans-serif;
+  font-weight: 400;
 }
 
 
