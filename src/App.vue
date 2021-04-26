@@ -248,6 +248,12 @@ export default {
     this.songs.forEach(song => {
       fac.getColorAsync(`${song.image}`).then( color => song.background = color.hex) .catch(e => {console.log(e);});
     })
+    if (('ontouchstart' in window) ) {
+      console.log('this is a touch device');
+    } else {
+      console.log('this is not a touch device');
+      document.body.classList.add('no-touch');
+    }
 
   }
 }
@@ -516,8 +522,7 @@ svg {
   outline: none;
   background-color: transparent;
 }
-
-.bottom__block_controls button:hover {
+.no-touch .bottom__block_controls button:hover {
   background-color: #F0F0F0;
 }
 
@@ -526,11 +531,12 @@ svg {
   width: auto;
 }
 
-.bottom__block_controls button.nothover:hover {
+.no-touch .bottom__block_controls button.nothover:hover {
   background-color: transparent;
 }
 
-.bottom__block_controls button.nothover:hover svg path {
+
+.no-touch .bottom__block_controls button.nothover:hover svg path {
   fill: #000;
 }
 
@@ -544,7 +550,7 @@ svg {
   justify-content: center;
 }
 
-.bottom__block_controls .main-btn:hover {
+.no-touch .bottom__block_controls .main-btn:hover {
   background-color: #d7d7d7;
 }
 

@@ -1,24 +1,25 @@
-# music-app
-
-## Project setup
+# Музыкальный плеер настоящего викинга
+## https://vue-music-player-88422.web.app/
+### Ссылка на [behance]()
+## Об плеере
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+Небольшой проект, для практики написания кода на Vue. Так же неплохая практика работы с аудиоплеером, 
+временем и средним цветом картинки в JS.
+По ссылке вы найдете небольшое количество песен скандинавского происхождения
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### Доработки и планы
 
-### Lints and fixes files
-```
-npm run lint
-```
+1. Изменение адаптивности, доработка стилей
+1. Добавление песен
+1. Структурирование кода на компоненты и логические блоки
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Контакты
+```
+    @telegamet - Telegram
+    shemetg@gmail.com - Почта
+```
+### Важно знать
+```
+    * Веб приложение написанно в учебных целях, и не является комерческеским проектом
+```
