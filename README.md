@@ -1,6 +1,6 @@
 # Музыкальный плеер настоящего викинга
 ## https://vue-music-player-88422.web.app/
-### Ссылка на [behance]()
+### Ссылка на [behance](https://www.behance.net/gallery/118364647/pleer-nastojaschego-vikingia)
 ## Об плеере
 ```
 Небольшой проект, для практики написания кода на Vue. Так же неплохая практика работы с аудиоплеером, 
