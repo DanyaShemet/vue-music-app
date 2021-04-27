@@ -518,10 +518,7 @@ svg {
   justify-content: center;
   outline: none;
 }
-.bottom__block_controls button:focus{
-  outline: none;
-  background-color: transparent;
-}
+
 .no-touch .bottom__block_controls button:hover {
   background-color: #F0F0F0;
 }
