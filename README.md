@@ -1,15 +1,9 @@
-# Музичний плеєр справжнього вікінга
+# Music player of a real Viking
 ## https://vue-music-player-88422.web.app/
-### Помилання на [behance](https://www.behance.net/gallery/118364647/pleer-nastojaschego-vikingia)
-## Про плеєр
+### Link  [behance](https://www.behance.net/gallery/118364647/pleer-nastojaschego-vikingia)
+## About app
 ```
 
-Невеликий проект для практики написання коду на Vue. Також непогана практика роботи з аудіоплеєром, 
-часом та середнім кольором картинки у JS.
-```
-
-### Контакты
-```
-    @telegamet - Telegram
-    shemetg@gmail.com - Почта
+A small project to practice writing code in Vue. It is also a good practice to work with an audio player, 
+time and the average color of the image in JS.
 ```
